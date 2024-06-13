@@ -1,0 +1,5 @@
+<form action="{% url 'pollingapps:vote' question.id %}" method="post">
+    {% csrf_token %}
+    {{ RadioForm.as_p }}
+    <button name="submit">Register</button>
+</form>
