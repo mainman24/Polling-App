@@ -28,12 +28,19 @@ def detail(request, question_id):
 
 def results(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
-    context = {'question': question}
+
+    totalvotes = 0
+    for choice in question.choice_set.all():
+        totalvotes += choice.votes
+    totalvotes = int(500 / totalvotes)
+    print(totalvotes)
+    context = {'question': question, 'totalvotes': totalvotes}
     return render(request, "pollingapps/results.html", context)
 
 
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
+
     print(request.POST)
     selected_choice = question.choice_set.get(id=request.POST["choose_occupation"])
     print(selected_choice)

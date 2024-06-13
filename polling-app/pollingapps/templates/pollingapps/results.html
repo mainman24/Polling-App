@@ -1,6 +1,16 @@
 <ul>
 {%for choice in question.choice_set.all%}
+	<style>
+	.Rectangle{{choice.id}}{
+		width:  {% widthratio choice.votes 1 totalvotes  %}px;
+		height: 20px;
+		background-color: grey;
+	}
+	</style>
+	<!-- Rectangle in div and style ensure that each rectangle has a different name -->
+
 	<li> {{ choice}} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+	<div class=Rectangle{{choice.id}}></div>
 {%endfor%}
 </ul>
 
